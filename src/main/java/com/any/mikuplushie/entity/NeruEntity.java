@@ -1,6 +1,6 @@
 package com.any.mikuplushie.entity;
 
-import software.bernie.geckolib.animation.RawAnimation;
+import com.geckolib.animation.RawAnimation;
 
 import java.util.List;
 import net.minecraft.world.entity.EntityType;

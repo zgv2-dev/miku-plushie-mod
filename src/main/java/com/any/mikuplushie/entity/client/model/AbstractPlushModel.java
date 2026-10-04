@@ -6,8 +6,8 @@ import com.any.mikuplushie.entity.client.model.animations.PlushAnimations;
 import com.any.mikuplushie.registry.ModBlocks;
 import com.any.mikuplushie.util.ModUtil;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.model.GeoModel;
+import com.geckolib.animation.AnimationState;
+import com.geckolib.model.GeoModel;
 
 public class AbstractPlushModel extends GeoModel<AbstractPlushEntity> {
 

@@ -1,13 +1,13 @@
 package com.any.mikuplushie.entity.client.model.animations;
 
 import com.any.mikuplushie.entity.AbstractPlushEntity;
-import software.bernie.geckolib.cache.object.GeoBone;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.model.GeoModel;
+import com.geckolib.cache.model.GeoBone;
+import com.geckolib.constant.DataTickets;
+import com.geckolib.model.GeoModel;
 
 public class PlushAnimations {
 
-    public static void limbAnimations(GeoModel<?> plush, AbstractPlushEntity animatable, software.bernie.geckolib.animation.AnimationState<?> state){
+    public static void limbAnimations(GeoModel<?> plush, AbstractPlushEntity animatable, com.geckolib.animation.AnimationState<?> state){
         //LIMB ANIM VARIABLES
         float limbSwing = state.getLimbSwing();
         float swingAmm = state.getLimbSwingAmount();
@@ -55,7 +55,7 @@ public class PlushAnimations {
         head.setRotY(headYaw * toRad);
     }
 
-    public static void hairMovement(GeoModel<?> plush, AbstractPlushEntity animatable, software.bernie.geckolib.animation.AnimationState<?> state){
+    public static void hairMovement(GeoModel<?> plush, AbstractPlushEntity animatable, com.geckolib.animation.AnimationState<?> state){
         //ANIM VARIABLES
         float limbSwing = state.getLimbSwing();
         float swingAmm = state.getLimbSwingAmount();

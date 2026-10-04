@@ -14,7 +14,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.EntityType;
-import software.bernie.geckolib.loading.math.MathParser;
+import com.geckolib.loading.math.MathParser;
 
 @Environment(EnvType.CLIENT)
 public class MikuPlushieClient implements ClientModInitializer {
