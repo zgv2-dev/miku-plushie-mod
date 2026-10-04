@@ -7,12 +7,4 @@ pluginManagement {
 		mavenCentral()
 		gradlePluginPortal()
 	}
-	// fabric-loom 1.18-SNAPSHOT (needed for MC 26.x) has no plugin marker; map id -> library.
-	resolutionStrategy {
-		eachPlugin {
-			if (requested.id.id == 'fabric-loom' || requested.id.id == 'net.fabricmc.fabric-loom') {
-				useModule("net.fabricmc:fabric-loom:${requested.version}")
-			}
-		}
-	}
 }
