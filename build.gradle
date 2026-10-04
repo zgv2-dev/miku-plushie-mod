@@ -17,21 +17,16 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
     maven {
-        name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        name = 'Modrinth'
+        url 'https://api.modrinth.com/maven'
         content {
-            includeGroupByRegex("software\\.bernie.*")
-            includeGroup("com.eliotlash.mclib")
+            includeGroup("maven.modrinth")
         }
-    }
-
-    dependencies {
-        modImplementation("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}")
     }
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/${archives_base_name}.accesswidener")
+    accessWidenerPath = file("src/main/resources/${archives_base_name}.classtweaker")
 }
 
 fabricApi {
@@ -42,13 +37,15 @@ fabricApi {
 
 dependencies {
 	// To change the versions see the gradle.properties file
+	// MC 26.x ships deobfuscated (Mojang official names); no `mappings` layer needed.
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.officialMojangMappings()
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// GeckoLib (fabric) via Modrinth maven; geckolib_version is the Modrinth version id
+	implementation "maven.modrinth:geckolib:${project.geckolib_version}"
 }
 
 processResources {
@@ -60,7 +57,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 25
 }
 
 java {
@@ -69,8 +66,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
