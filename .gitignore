@@ -43,3 +43,6 @@ replay_*.log
 
 *.kra
 /resourcepacks/
+
+# agent scratch
+.superpowers/

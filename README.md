@@ -1,6 +1,5 @@
-## Looking for volunteers on porting the mod to version 26.1/NeoForge, please feeel free to open a PR
+> **This fork:** Fabric builds for Minecraft **26.1 – 26.3** (26.1, 26.1.1, 26.1.2, 26.2, 26.3). Download the jar matching your Minecraft version from [Releases](https://github.com/zgv2-dev/miku-plushie-mod/releases).
 
-[//]: # (<!--suppress HtmlDeprecatedAttribute -->)
 <h1 style="text-align:center">
 Hatsune Miku Just Arrived in Minecraft
 </h1>
@@ -8,13 +7,8 @@ Hatsune Miku Just Arrived in Minecraft
 [//]: # (info Badges)
 <p style="text-align:center">
 
-[//]: # (  <img src="https://img.shields.io/badge/License-GPL_3.0-FF6699" alt="GPL V3.0"/>)
-
-[//]: # (  <img src="https://img.shields.io/badge/Fabric-1.20.1-00B4AB" alt="Fabric 1.20.1"/>)
-
-[//]: # (  <img src="https://img.shields.io/badge/Fabric-1.21.1-9999CC" alt="Fabric 1.21.1"/>)
 <img alt="fabric-api" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/requires/fabric-api_vector.svg">
-<img alt="fabric-api" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/requires/geckolib_vector.svg">
+<img alt="geckolib" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/requires/geckolib_vector.svg">
 </p>
 
 [//]: # (Download Links)
@@ -38,7 +32,7 @@ You can suggest new plushies via <a href="https://github.com/4nyNoob/miku-plushi
 </h3>
 
 <a style="text-align:center" href="https://github.com/4nyNoob/miku-plushie-mod/wiki/Crafting-Recipes#plushies">
-    <img alt="Plushies Atlas" src="https://raw.githubusercontent.com/4nyNoob/miku-plushie-mod/refs/heads/fabric-1.20.1/assets/plushies-atlas/plushies-atlas.webp?raw=true"/>
+    <img alt="Plushies Atlas" src="assets/plushies-atlas/plushies-atlas.webp"/>
 </a>
 
 ## Features:
@@ -49,9 +43,9 @@ You can suggest new plushies via <a href="https://github.com/4nyNoob/miku-plushi
  - ### Plushies can be your pets now
 
    - ### They Can Dance!!!
-     ![Plushies dancing](https://raw.githubusercontent.com/4nyNoob/miku-plushie-mod/refs/heads/fabric-1.20.1/assets/gameplay/dance.gif)
+     ![Plushies dancing](assets/gameplay/dance.gif)
    - ### They Can Hunt With You
-     ![A couple of Hatsune Mikus v4 Hunting a cow](https://raw.githubusercontent.com/4nyNoob/miku-plushie-mod/refs/heads/fabric-1.20.1/assets/gameplay/hunting.gif)
+     ![A couple of Hatsune Mikus v4 Hunting a cow](assets/gameplay/hunting.gif)
    - ### And much More
 
 <details>
