@@ -5,8 +5,16 @@ import com.any.mikuplushie.item.MikuPlushieBlockItem;
 import com.any.mikuplushie.item.ModFoodComponents;
 import com.any.mikuplushie.item.PlushToolMaterial;
 import com.any.mikuplushie.util.ModUtil;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.equipment.Equippable;
+import java.util.function.Function;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -14,9 +22,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import java.util.ArrayList;
@@ -32,7 +38,7 @@ public class ModItems {
 	public static final ResourceKey<CreativeModeTab> MIKU_GROUP_KEY =
         ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "item_group")
 	);
-	public static final CreativeModeTab MIKU_GROUP = FabricItemGroup.builder()
+	public static final CreativeModeTab MIKU_GROUP = FabricCreativeModeTab.builder()
 		.icon(() -> new ItemStack(ModBlocks.MIKU_PLUSH))
 		.title(Component.translatable("item.group.miku_plushies"))
 		.build();
@@ -40,20 +46,20 @@ public class ModItems {
 
     //REGISTER REGULAR ITEMS
 	public static final Item CANUDINHO =
-        register(new Item(new Item.Properties().rarity(Rarity.RARE)), "canudinho");
+        register("canudinho", Item::new, new Item.Properties().rarity(Rarity.RARE));
 	public static final Item BAGUETTE =
-        register(new Item(new Item.Properties().food(ModFoodComponents.BAGUETTE)), "baguette");
+        register("baguette", Item::new, new Item.Properties().food(ModFoodComponents.BAGUETTE));
 
     public static final Item LEEK_SEEDS =
-        register(new ItemNameBlockItem(ModBlocks.LEEK_CROP, new Item.Properties()), "leek_seeds");
+        register("leek_seeds", p -> new BlockItem(ModBlocks.LEEK_CROP, p), new Item.Properties().useItemDescriptionPrefix());
     public static final Item LEEK =
-        register(new Item(new Item.Properties().food(ModFoodComponents.LEEK)), "leek");
+        register("leek", Item::new, new Item.Properties().food(ModFoodComponents.LEEK));
 
     public static final Item AKITA_NERU_PHONE =
-        register(new Item(new Item.Properties()), "akita_neru_phone");
+        register("akita_neru_phone", Item::new, new Item.Properties());
 
     public static final Item VOCALOID_HEART =
-        register(new Item(new Item.Properties()), "vocaloid_heart");
+        register("vocaloid_heart", Item::new, new Item.Properties());
 
     //REGISTER TETO PICKAXE ITEMS
     public static final Item TETO_PICKAXE = registerPickaxe("teto_pickaxe");
@@ -78,20 +84,24 @@ public class ModItems {
                 plushBlock = registeredPlushBlock;
             }
         }
-        return register(new MikuPlushieBlockItem(plushBlock, new Item.Properties()), name);
+        final Block block = plushBlock;
+        SoundEvent equipSound = name.equals("konoha_plush") ? SoundEvents.WOOL_PLACE : ModUtil.getPlushSoundEvent(name, "equip");
+        return register(name, p -> new MikuPlushieBlockItem(block, p), new Item.Properties()
+            .useBlockDescriptionPrefix()
+            .component(net.minecraft.core.component.DataComponents.EQUIPPABLE,
+                Equippable.builder(EquipmentSlot.HEAD).setEquipSound(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(equipSound)).build()));
     }
 
     //REGISTER PICKAXES HELPER
     public static Item registerPickaxe(String name) {
-        return register(new PickaxeItem(PlushToolMaterial.PLUSH_TOOL_MATERIAL, new Item.Properties().attributes(
-                PickaxeItem.createAttributes(
-                    PlushToolMaterial.PLUSH_TOOL_MATERIAL, 1f, -2.8F))), name);
+        return register(name, Item::new, new Item.Properties().pickaxe(PlushToolMaterial.PLUSH_TOOL_MATERIAL, 1f, -2.8F));
     }
 
     //REGISTER NORMAL ITEM
-	public static Item register(Item item, String id) {
-		Identifier itemID = Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, id);
-        Item register = Registry.register(BuiltInRegistries.ITEM, itemID, item);
+	public static Item register(String id, Function<Item.Properties, Item> factory, Item.Properties properties) {
+		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, id));
+        Item item = factory.apply(properties.setId(key));
+        Item register = Registry.register(BuiltInRegistries.ITEM, key, item);
         String itemName = ModUtil.getBlockIdFromItem(item);
 
         //ADD TETO PICKAXES TO THE PICKAXES LIST
@@ -120,7 +130,7 @@ public class ModItems {
         }
 
         //POPULATE ITEM GROUP
-		ItemGroupEvents.modifyEntriesEvent(MIKU_GROUP_KEY).register(itemGroup -> {
+		CreativeModeTabEvents.modifyOutputEvent(MIKU_GROUP_KEY).register(itemGroup -> {
 
             REGULAR_ITEMS.forEach(itemGroup::accept);
             PLUSH_ITEMS.forEach(itemGroup::accept);
