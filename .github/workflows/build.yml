@@ -6,6 +6,7 @@ on:
     tags: ['v*']
   pull_request:
     branches: ['26.x-fabric']
+  workflow_dispatch: # run on a tag to (re)publish its Release
 
 permissions:
   contents: write
