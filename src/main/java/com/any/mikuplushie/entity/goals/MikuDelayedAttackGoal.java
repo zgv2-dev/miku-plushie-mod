@@ -20,7 +20,7 @@ public class MikuDelayedAttackGoal extends MeleeAttackGoal {
     protected void checkAndPerformAttack(LivingEntity target) {
         if (this.canPerformAttack(target)) {
             this.resetAttackCooldown();
-            this.mob.swing(InteractionHand.MAIN_HAND);
+            this.mob.swingForAttack(InteractionHand.MAIN_HAND);
             this.target = target;
             this.mikuAttacking = true;
         }
@@ -33,7 +33,7 @@ public class MikuDelayedAttackGoal extends MeleeAttackGoal {
         if (this.mikuAttacking){
             --this.attackDelay;
             if (this.attackDelay <= 0){
-                this.mob.doHurtTarget(this.target);
+                if (this.mob.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) this.mob.doHurtTarget(serverLevel, this.target);
                 this.mikuAttacking = false;
             }
         } else {

@@ -32,7 +32,7 @@ public class SpawnMikusCommand {
 
     public static void register (CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("spawn_mikus")
-            .requires(source -> source.hasPermission(2))
+            .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
             .then(Commands.argument("pos", Vec3Argument.vec3())
                 .executes(commandContext ->
                     spawnMikus(commandContext.getSource(),
@@ -121,7 +121,7 @@ public class SpawnMikusCommand {
                             for (int entity = 0; entity < entityTypeRegistry.size(); entity++) {
                                 if (Objects.requireNonNull(entityTypeRegistry.byId(entity)).getDescriptionId().contains(entityName)){
                                     //SPAWN ENTITY ACCORDING TO BLOCK NAME
-                                    AbstractPlushEntity spawned = (AbstractPlushEntity) Objects.requireNonNull(entityTypeRegistry.byId(entity)).create(world);
+                                    AbstractPlushEntity spawned = (AbstractPlushEntity) Objects.requireNonNull(entityTypeRegistry.byId(entity)).create(world, net.minecraft.world.entity.EntitySpawnReason.COMMAND);
                                     //SETUP AND SPAWN ENTITY
                                     setupEntity(Objects.requireNonNull(spawned), entitySpawnLocation);
                                     spawned.setVariantByBlock(blockName);
@@ -156,7 +156,7 @@ public class SpawnMikusCommand {
     }
 
     private static @NotNull ArmorStand getArmorStandEntity(ServerLevel world, Vec3 entitySpawn, ItemStack plushItem) {
-        ArmorStand armorStandEntity = new ArmorStand(EntityType.ARMOR_STAND, world);
+        ArmorStand armorStandEntity = new ArmorStand(world, entitySpawn.x, entitySpawn.y, entitySpawn.z);
         armorStandEntity.setPos(entitySpawn);
         armorStandEntity.setItemSlot(EquipmentSlot.HEAD, plushItem);
         armorStandEntity.setItemSlot(EquipmentSlot.MAINHAND, plushItem);

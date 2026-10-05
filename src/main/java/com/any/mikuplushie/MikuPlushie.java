@@ -20,7 +20,6 @@ public class MikuPlushie implements ModInitializer {
         ModCommands.initialize();
         ModEntities.initialize();
         ModResourcePacks.initialize();
-		ModVillagerTrades.initialize();
 		ModParticles.initialize();
 		ModWorldGeneration.generateModWorldGeneration();
 		PlushVariants.initialize();

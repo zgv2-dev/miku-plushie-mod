@@ -3,10 +3,13 @@ package com.any.mikuplushie.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 
-public class PlushSpawnParticle extends TextureSheetParticle {
+public class PlushSpawnParticle extends SingleQuadParticle {
     private final SpriteSet spriteProvider;
 
     protected PlushSpawnParticle(
@@ -15,7 +18,7 @@ public class PlushSpawnParticle extends TextureSheetParticle {
         double velocityX, double velocityY, double velocityZ,
         SpriteSet spriteProvider
     ) {
-        super(world, x, y, z);
+        super(world, x, y, z, spriteProvider.first());
 
         this.gravity = -0.1F;
         this.friction = 0.9F;
@@ -37,8 +40,8 @@ public class PlushSpawnParticle extends TextureSheetParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    protected Layer getLayer() {
+        return Layer.TRANSLUCENT;
     }
 
     @Override
@@ -59,7 +62,8 @@ public class PlushSpawnParticle extends TextureSheetParticle {
             SimpleParticleType defaultParticleType,
             ClientLevel clientWorld,
             double x, double y, double z,
-            double velocityX, double velocityY, double velocityZ
+            double velocityX, double velocityY, double velocityZ,
+            net.minecraft.util.RandomSource random
         ) {
             return new PlushSpawnParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ, this.spriteProvider);
         }

@@ -9,10 +9,8 @@ import com.any.mikuplushie.registry.ModParticles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.EntityType;
 import com.geckolib.loading.math.MathParser;
 
@@ -20,20 +18,7 @@ import com.geckolib.loading.math.MathParser;
 public class MikuPlushieClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-        MikuPlushie.LOGGER.info("Registering " + MikuPlushie.MOD_ID + " Block Render Layer Maps");
-
-        //PLUSH CUTOUT
-        for (int block = 0; block < ModBlocks.PLUSH_BLOCKS.size(); block++) {
-            if (!ModBlocks.PLUSH_BLOCKS.get(block).equals(ModBlocks.MIKU_PLUSH_GHOST))
-                BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PLUSH_BLOCKS.get(block), RenderType.cutout());
-        }
-
-        //PLUSH TRANSLUCENT
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MIKU_PLUSH_GHOST, RenderType.translucent());
-
-        //NON PLUSH BLOCKS
-		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LEEK_CROP, RenderType.cutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WILD_LEEK_CROP, RenderType.cutout());
+        // 26.x picks block render layers automatically from texture transparency.
 
         //GLIB QUERY
         MathParser.setVariable("query.miku.is_game", () -> 90 / Math.PI);
@@ -44,6 +29,6 @@ public class MikuPlushieClient implements ClientModInitializer {
         }
 
         //PARTICLE
-        ParticleFactoryRegistry.getInstance().register(ModParticles.MIKU_SPAWN, PlushSpawnParticle.Factory::new);
+        ParticleProviderRegistry.getInstance().register(ModParticles.MIKU_SPAWN, PlushSpawnParticle.Factory::new);
 	}
 }
