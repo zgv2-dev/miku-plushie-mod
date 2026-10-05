@@ -1,72 +1,69 @@
 package com.any.mikuplushie.entity.client.model.animations;
 
-import com.any.mikuplushie.entity.AbstractPlushEntity;
-import com.geckolib.cache.model.GeoBone;
-import com.geckolib.constant.DataTickets;
-import com.geckolib.model.GeoModel;
+import com.any.mikuplushie.entity.client.model.AbstractPlushModel;
+import com.geckolib.renderer.base.BoneSnapshots;
+import com.geckolib.renderer.base.GeoRenderState;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
+// Procedural limb/head/hair motion layered on top of the JSON animations (GeckoLib 5 bone snapshots).
 public class PlushAnimations {
+    private static final float TO_RAD = (float) (Math.PI / 180);
 
-    public static void limbAnimations(GeoModel<?> plush, AbstractPlushEntity animatable, com.geckolib.animation.AnimationState<?> state){
+    public static <R extends LivingEntityRenderState & GeoRenderState> void apply(R state, BoneSnapshots bones) {
+        String name = state.getOrDefaultGeckolibData(AbstractPlushModel.PLUSH_NAME, "");
+        if (name.contains("miku") || name.contains("teto") || name.contains("neru")) {
+            hairMovement(state, bones);
+        }
+        limbAnimations(state, bones);
+    }
+
+    public static <R extends LivingEntityRenderState & GeoRenderState> void limbAnimations(R state, BoneSnapshots bones) {
         //LIMB ANIM VARIABLES
-        float limbSwing = state.getLimbSwing();
-        float swingAmm = state.getLimbSwingAmount();
-        float toRad = (float) (Math.PI / 180);
+        float limbSwing = state.walkAnimationPos;
+        float swingAmm = state.walkAnimationSpeed;
         float swingSpeed = 1F;
 
-        //GET BONES
-        GeoBone root = plush.getAnimationProcessor().getBone("root_offset");
-        GeoBone left_leg = plush.getAnimationProcessor().getBone("left_leg_offset");
-        GeoBone right_leg = plush.getAnimationProcessor().getBone("right_leg_offset");
-        GeoBone left_arm = plush.getAnimationProcessor().getBone("left_arm_offset");
-        GeoBone right_arm = plush.getAnimationProcessor().getBone("right_arm_offset");
-        GeoBone body = plush.getAnimationProcessor().getBone("body_offset");
-
         //HEALTH DISPLAY
-        float maxHealth = animatable.getMaxHealth();
-        float health = animatable.getHealth();
-        float healthFactor = health / maxHealth;
+        float healthFactor = state.getOrDefaultGeckolibData(AbstractPlushModel.HEALTH_FACTOR, 1F);
         int bendAmount = 25;
         float healthBend = ((healthFactor) - 1) * bendAmount;
 
         //ROOT ANIMATION
-        root.setRotZ((float) Math.sin(limbSwing * swingSpeed) * (swingAmm * 5 * toRad));
-        root.setPosY((float) Math.sin(limbSwing * swingSpeed * 2) * (swingAmm * 1) + (swingAmm * 1));
+        bones.ifPresent("root_offset", root -> {
+            root.setRotZ((float) Math.sin(limbSwing * swingSpeed) * (swingAmm * 5 * TO_RAD));
+            root.setTranslateY((float) Math.sin(limbSwing * swingSpeed * 2) * (swingAmm * 1) + (swingAmm * 1));
+        });
 
         //DISABLE ARM ANIMATIONS WHEN DANCING AND ATTACKING
-        if (animatable.isSongPlaying() || animatable.swinging){
-            left_arm.setRotX(0);
-            right_arm.setRotX(0);
-        } else {
-            left_arm.setRotX((float) Math.sin(limbSwing * swingSpeed) * (swingAmm * 50 * toRad) - (healthBend * toRad));
-            right_arm.setRotX((float) Math.sin(limbSwing * swingSpeed) * (swingAmm * -50 * toRad) - (healthBend * toRad));
-        }
+        boolean armsStill = state.getOrDefaultGeckolibData(AbstractPlushModel.SONG_PLAYING, false)
+            || state.getOrDefaultGeckolibData(AbstractPlushModel.SWINGING, false);
+        bones.ifPresent("left_arm_offset", arm -> arm.setRotX(armsStill ? 0 :
+            (float) Math.sin(limbSwing * swingSpeed) * (swingAmm * 50 * TO_RAD) - (healthBend * TO_RAD)));
+        bones.ifPresent("right_arm_offset", arm -> arm.setRotX(armsStill ? 0 :
+            (float) Math.sin(limbSwing * swingSpeed) * (swingAmm * -50 * TO_RAD) - (healthBend * TO_RAD)));
+
         //LEGS ANIMATION
-        left_leg.setRotX((float) Math.sin(limbSwing * swingSpeed) * (swingAmm * -50 * toRad));
-        right_leg.setRotX((float) Math.sin(limbSwing * swingSpeed) * (swingAmm * 50 * toRad));
+        bones.ifPresent("left_leg_offset", leg -> leg.setRotX((float) Math.sin(limbSwing * swingSpeed) * (swingAmm * -50 * TO_RAD)));
+        bones.ifPresent("right_leg_offset", leg -> leg.setRotX((float) Math.sin(limbSwing * swingSpeed) * (swingAmm * 50 * TO_RAD)));
+
         //BODY ANIMATION
-        body.setRotX(healthBend * toRad);
+        bones.ifPresent("body_offset", body -> body.setRotX(healthBend * TO_RAD));
 
         //HEAD ANIM
-        GeoBone head = plush.getAnimationProcessor().getBone("head_offset");
-        float headPitch = state.getData(DataTickets.ENTITY_MODEL_DATA).headPitch();
-        float headYaw = state.getData(DataTickets.ENTITY_MODEL_DATA).netHeadYaw();
-        head.setRotX((headPitch - healthBend) * toRad);
-        head.setRotY(headYaw * toRad);
+        bones.ifPresent("head_offset", head -> {
+            head.setRotX((state.xRot - healthBend) * TO_RAD);
+            head.setRotY(state.yRot * TO_RAD);
+        });
     }
 
-    public static void hairMovement(GeoModel<?> plush, AbstractPlushEntity animatable, com.geckolib.animation.AnimationState<?> state){
-        //ANIM VARIABLES
-        float limbSwing = state.getLimbSwing();
-        float swingAmm = state.getLimbSwingAmount();
-        float toRad = (float) (Math.PI / 180);
+    public static <R extends LivingEntityRenderState & GeoRenderState> void hairMovement(R state, BoneSnapshots bones) {
+        float limbSwing = state.walkAnimationPos;
+        float swingAmm = state.walkAnimationSpeed;
         float swingSpeed = 1F;
 
-        GeoBone hair = plush.getAnimationProcessor().getBone("hair_offset");
-        float headPitch = state.getData(DataTickets.ENTITY_MODEL_DATA).headPitch();
-
-        hair.setRotX(-headPitch * ((float) Math.PI / 180F));
-        hair.setRotZ((float) Math.sin(limbSwing * swingSpeed - (45/20F)) * (swingAmm * -10 * toRad));
+        bones.ifPresent("hair_offset", hair -> {
+            hair.setRotX(-state.xRot * TO_RAD);
+            hair.setRotZ((float) Math.sin(limbSwing * swingSpeed - (45/20F)) * (swingAmm * -10 * TO_RAD));
+        });
     }
-
 }

@@ -3,9 +3,9 @@ package com.any.mikuplushie.entity;
 import com.any.mikuplushie.entity.goals.EatLeekGoal;
 import com.any.mikuplushie.registry.ModBlocks;
 import com.geckolib.animatable.instance.AnimatableInstanceCache;
-import com.geckolib.animation.AnimatableManager;
+import com.geckolib.animatable.manager.AnimatableManager;
 import com.geckolib.animation.AnimationController;
-import com.geckolib.animation.PlayState;
+import com.geckolib.animation.object.PlayState;
 import com.geckolib.animation.RawAnimation;
 import com.geckolib.util.GeckoLibUtil;
 
@@ -54,7 +54,7 @@ public class MikuEntity extends AbstractPlushEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         super.registerControllers(controllers);
-        controllers.add(new AnimationController<>(this, "miku_eat", 2, state -> {
+        controllers.add(new AnimationController<>("miku_eat", 2, state -> {
             if (!this.isInSittingPose() && this.isEatingLeek()){
                 return state.setAndContinue(EAT);
             }

@@ -54,7 +54,7 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 import com.geckolib.animatable.GeoEntity;
 import com.geckolib.animatable.instance.AnimatableInstanceCache;
-import com.geckolib.animation.AnimatableManager;
+import com.geckolib.animatable.manager.AnimatableManager;
 import com.geckolib.animation.AnimationController;
 import com.geckolib.animation.RawAnimation;
 import com.geckolib.util.GeckoLibUtil;
@@ -174,7 +174,7 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
     //ANIMATION CONTROLLER
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "Plush", 2, state -> {
+        controllers.add(new AnimationController<>("Plush", 2, state -> {
             List<RawAnimation> DANCES = getDances();
 
             //SITTING ANIMATIONS
@@ -197,11 +197,11 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
 
                 //DANCE
                 else if (this.isSongPlaying()){
-                    RawAnimation currentAnimation = state.getController().getCurrentRawAnimation();
+                    RawAnimation currentAnimation = state.controller().getCurrentRawAnimation();
 
                     for (RawAnimation animation : DANCES){
                         //IF ALREADY DANCING THEN CONTINUE
-                        if (currentAnimation.equals(animation)){
+                        if (animation.equals(currentAnimation)){
                             return state.setAndContinue(animation);
                         }
                     }
@@ -219,12 +219,12 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
                 }
 
                 //ATTACKING
-                else if (this.swinging) {
-                    RawAnimation currentAnimation = state.getController().getCurrentRawAnimation();
+                else if (this.isSwinging()) {
+                    RawAnimation currentAnimation = state.controller().getCurrentRawAnimation();
 
                     for (RawAnimation animation : ATTACK_ANIMATIONS){
                         //IF ALREADY ATTACKING THE CONTINUE
-                        if (currentAnimation.equals(animation)){
+                        if (animation.equals(currentAnimation)){
                             return state.setAndContinue(animation);
                         }
                     }
@@ -246,12 +246,6 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
-    }
-
-    //HAND SWING DURATION
-    @Override
-    public final int getCurrentSwingDuration() {
-        return 10;
     }
 
     //STATIC SOUND PITCH
@@ -281,7 +275,7 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
             if (!this.level().isClientSide()) {
                 //DROP HELD ITEM
                 if (player.isShiftKeyDown() && playerItemStack.isEmpty()) {
-                    this.spawnAtLocation(entityHandStack);
+                    this.spawnAtLocation((ServerLevel) this.level(), entityHandStack);
                     this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
                     return InteractionResult.SUCCESS;
                 }
@@ -294,7 +288,7 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
                         }
                         float nutrition = foodComponent != null ? (float)foodComponent.nutrition() : 1.0F;
                         this.heal(nutrition);
-                        this.playSound(SoundEvents.GENERIC_EAT, 1, 1);
+                        this.playSound(SoundEvents.GENERIC_EAT.value(), 1, 1);
                     }
                     return InteractionResult.SUCCESS;
                 }
@@ -349,7 +343,6 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
     @Override
     public void aiStep() {
         super.aiStep();
-        this.updateSwingTime();
 
         //GET NEARBY SONG PLAYING
         if (
@@ -426,10 +419,10 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
 
     //LOAD AND SAVE NBT DATA
     @Override
-    public void readAdditionalSaveData(CompoundTag nbt) {
+    protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput nbt) {
         super.readAdditionalSaveData(nbt);
-        this.entityData.set(SPAWN_AGE, nbt.getInt("SpawnAge"));
-        this.entityData.set(this.getVariantDataTracker(), nbt.getInt("Variant"));
+        this.entityData.set(SPAWN_AGE, nbt.getIntOr("SpawnAge", 0));
+        this.entityData.set(this.getVariantDataTracker(), nbt.getIntOr("Variant", 0));
     }
 
     @Override
@@ -438,7 +431,7 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag nbt) {
+    protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput nbt) {
         super.addAdditionalSaveData(nbt);
         nbt.putInt("SpawnAge", Math.min(this.tickCount, 11));
         nbt.putInt("Variant", this.getTrackedVariant());

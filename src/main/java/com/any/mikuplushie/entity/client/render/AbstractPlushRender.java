@@ -1,99 +1,48 @@
 package com.any.mikuplushie.entity.client.render;
 
 import com.any.mikuplushie.entity.AbstractPlushEntity;
-import com.any.mikuplushie.entity.TetoEntity;
 import com.any.mikuplushie.entity.client.model.AbstractPlushModel;
+import com.any.mikuplushie.entity.client.model.animations.PlushAnimations;
 import com.any.mikuplushie.registry.ModBlocks;
 import com.any.mikuplushie.util.ModUtil;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
-import org.jetbrains.annotations.Nullable;
-import com.geckolib.cache.model.BakedGeoModel;
-import com.geckolib.cache.model.GeoBone;
 import com.geckolib.renderer.GeoEntityRenderer;
-import com.geckolib.renderer.layer.builtin.BlockAndItemGeoLayer;
+import com.geckolib.renderer.base.BoneSnapshots;
+import com.geckolib.renderer.base.GeoRenderState;
+import com.geckolib.renderer.base.RenderPassInfo;
+import com.geckolib.renderer.layer.builtin.ItemInHandGeoLayer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
 
-public class AbstractPlushRender extends GeoEntityRenderer<AbstractPlushEntity> {
+public class AbstractPlushRender<R extends LivingEntityRenderState & GeoRenderState> extends GeoEntityRenderer<AbstractPlushEntity, R> {
 
     public static final String LEFT_HAND = "left_hand";
     public static final String RIGHT_HAND = "right_hand";
 
-    protected ItemStack mainHandItem;
-    protected ItemStack offHandItem;
-
-    public AbstractPlushRender(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new AbstractPlushModel());
-
-        // Add some held item rendering
-        addRenderLayer(new BlockAndItemGeoLayer<>(this) {
-            @Nullable
-            public ItemStack getStackForBone(GeoBone bone, AbstractPlushEntity animatable) {
-                // Retrieve the items in the entity's hands for the relevant bone
-                return switch (bone.getName()) {
-                    case LEFT_HAND -> animatable.isLeftHanded() ?
-                        AbstractPlushRender.this.mainHandItem : AbstractPlushRender.this.offHandItem;
-                    case RIGHT_HAND -> animatable.isLeftHanded() ?
-                        AbstractPlushRender.this.offHandItem : AbstractPlushRender.this.mainHandItem;
-                    default -> null;
-                };
-            }
-
-            public ItemDisplayContext getTransformTypeForStack(GeoBone bone, ItemStack stack, AbstractPlushEntity animatable) {
-                // Apply the camera transform for the given hand
-                return switch (bone.getName()) {
-                    case LEFT_HAND, RIGHT_HAND -> ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
-                    default -> ItemDisplayContext.NONE;
-                };
-            }
-
-            // Do some quick render modifications depending on what the item is
-            public void renderStackForBone(PoseStack poseStack, GeoBone bone, ItemStack stack, AbstractPlushEntity animatable,
-                                            MultiBufferSource bufferSource, float partialTick, int packedLight, int packedOverlay) {
-                if (stack == AbstractPlushRender.this.mainHandItem) {
-                    poseStack.mulPose(Axis.XP.rotationDegrees(-90f));
-
-                    if (stack.getItem() instanceof ShieldItem)
-                        poseStack.translate(0, 0.125, -0.25);
-                }
-                else if (stack == AbstractPlushRender.this.offHandItem) {
-                    poseStack.mulPose(Axis.XP.rotationDegrees(-90f));
-
-                    if (stack.getItem() instanceof ShieldItem) {
-                        poseStack.translate(0, 0.125, 0.25);
-                        poseStack.mulPose(Axis.YP.rotationDegrees(180));
-                    }
-                }
-
-                super.renderStackForBone(poseStack, bone, stack, animatable, bufferSource, partialTick, packedLight, packedOverlay);
-            }
-        });
+    public AbstractPlushRender(EntityRendererProvider.Context context) {
+        super(context, new AbstractPlushModel());
+        // held item rendering
+        withRenderLayer(new ItemInHandGeoLayer<>(context, this, RIGHT_HAND, LEFT_HAND));
     }
 
     @Override
-    public RenderType getRenderType(AbstractPlushEntity animatable, Identifier texture, MultiBufferSource bufferSource, float partialTick) {
+    public RenderType getRenderType(R renderState, Identifier texture) {
         //USE TRANSLUCENT RENDER ON SPECIFIC VARIATION
+        String variant = renderState.getOrDefaultGeckolibData(AbstractPlushModel.VARIANT, "");
         if (
-            animatable.getVariant().equals(ModUtil.getBlockIdFromBlock(ModBlocks.MIKU_PLUSH_GHOST)) ||
-            animatable.getVariant().equals(ModUtil.getBlockIdFromBlock(ModBlocks.TETO_PLUSH_WHATCHACALLITSNAME))
+            variant.equals(ModUtil.getBlockIdFromBlock(ModBlocks.MIKU_PLUSH_GHOST)) ||
+            variant.equals(ModUtil.getBlockIdFromBlock(ModBlocks.TETO_PLUSH_WHATCHACALLITSNAME))
         ){
-            return RenderType.entityTranslucent(texture);
-        } else {
-            return super.getRenderType(animatable, texture, bufferSource, partialTick);
+            return RenderTypes.entityTranslucent(texture);
         }
+        return super.getRenderType(renderState, texture);
     }
 
     @Override
-    public void preRender(PoseStack poseStack, AbstractPlushEntity animatable, BakedGeoModel model, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
-        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
-        this.mainHandItem = animatable.getMainHandItem();
-        this.offHandItem = animatable.getOffhandItem();
+    public void adjustModelBonesForRender(RenderPassInfo<R> renderPassInfo, BoneSnapshots snapshots) {
+        super.adjustModelBonesForRender(renderPassInfo, snapshots);
+        PlushAnimations.apply(renderPassInfo.renderState(), snapshots);
     }
 }

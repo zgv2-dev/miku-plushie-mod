@@ -21,7 +21,7 @@ public class MikuPlushieClient implements ClientModInitializer {
         // 26.x picks block render layers automatically from texture transparency.
 
         //GLIB QUERY
-        MathParser.setVariable("query.miku.is_game", () -> 90 / Math.PI);
+        MathParser.setVariable("query.miku.is_game", state -> 90 / Math.PI);
 
         //ENTITIES RENDERERS
         for (EntityType<? extends AbstractPlushEntity> plushEntity : ModEntities.PLUSH_ENTITIES) {

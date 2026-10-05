@@ -25,10 +25,6 @@ repositories {
     }
 }
 
-loom {
-    accessWidenerPath = file("src/main/resources/${archives_base_name}.classtweaker")
-}
-
 fabricApi {
 	configureDataGeneration {
 		client = true

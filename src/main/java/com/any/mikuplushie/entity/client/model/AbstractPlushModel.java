@@ -2,27 +2,44 @@ package com.any.mikuplushie.entity.client.model;
 
 import com.any.mikuplushie.MikuPlushie;
 import com.any.mikuplushie.entity.AbstractPlushEntity;
-import com.any.mikuplushie.entity.client.model.animations.PlushAnimations;
 import com.any.mikuplushie.registry.ModBlocks;
 import com.any.mikuplushie.util.ModUtil;
 import net.minecraft.resources.Identifier;
-import com.geckolib.animation.AnimationState;
+import com.geckolib.constant.dataticket.DataTicket;
 import com.geckolib.model.GeoModel;
+import com.geckolib.renderer.base.GeoRenderState;
 
 public class AbstractPlushModel extends GeoModel<AbstractPlushEntity> {
 
-    //    private final Identifier model = Identifier.of(MikuPlushie.MOD_ID, "geo/entity/" + entity + ".geo.json");
-    private final Identifier animations = Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "animations/plush.animation.json");
+    // GeckoLib 5: entity is not available at render time, so copy what rendering needs into the render state.
+    public static final DataTicket<String> PLUSH_NAME = DataTicket.create("miku_plush_name", String.class);
+    public static final DataTicket<String> VARIANT = DataTicket.create("miku_plush_variant", String.class);
+    public static final DataTicket<Float> HEALTH_FACTOR = DataTicket.create("miku_plush_health_factor", Float.class);
+    public static final DataTicket<Boolean> SONG_PLAYING = DataTicket.create("miku_plush_song_playing", Boolean.class);
+    public static final DataTicket<Boolean> SWINGING = DataTicket.create("miku_plush_swinging", Boolean.class);
+
+    // resolved by GeckoLib 5 to assets/miku-plushie/geckolib/animations/plush.animation.json
+    private final Identifier animations = Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "plush");
+
+    @Override
+    public void addAdditionalStateData(AbstractPlushEntity animatable, Object relatedObject, GeoRenderState renderState) {
+        super.addAdditionalStateData(animatable, relatedObject, renderState);
+        renderState.addGeckolibData(PLUSH_NAME, animatable.getPlushName());
+        renderState.addGeckolibData(VARIANT, animatable.getVariant());
+        renderState.addGeckolibData(HEALTH_FACTOR, animatable.getHealth() / animatable.getMaxHealth());
+        renderState.addGeckolibData(SONG_PLAYING, animatable.isSongPlaying());
+        renderState.addGeckolibData(SWINGING, animatable.isSwinging());
+    }
 
 
     @Override
-    public Identifier getModelResource(AbstractPlushEntity animatable) {
+    public Identifier getModelResource(GeoRenderState renderState) {
 
-        String entity = animatable.getPlushName();
-        String variant = animatable.getVariant();
+        String entity = renderState.getGeckolibData(PLUSH_NAME);
+        String variant = renderState.getGeckolibData(VARIANT);
 
-        if (variant.equals(animatable.getPlushName())){
-            return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "geo/entity/" + entity + ".geo.json");
+        if (variant.equals(entity)){
+            return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "entity/" + entity);
         }
         //VARIANTS THAT USE THE 2ND MODEL
         else if (
@@ -32,7 +49,7 @@ public class AbstractPlushModel extends GeoModel<AbstractPlushEntity> {
             variant.equals(ModUtil.getBlockIdFromBlock(ModBlocks.MIKU_PLUSH_PATATA)) ||
             variant.equals(ModUtil.getBlockIdFromBlock(ModBlocks.MIKU_PLUSH_DEVIL)) ||
             variant.equals(ModUtil.getBlockIdFromBlock(ModBlocks.MIKU_PLUSH_WITCH))) {
-            return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "geo/entity/" + entity + "_2" + ".geo.json");
+            return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "entity/" + entity + "_2");
         }
         //VARIANTS THAT USE THE 3RD MODEL
         else if (
@@ -50,14 +67,15 @@ public class AbstractPlushModel extends GeoModel<AbstractPlushEntity> {
             variant.equals(ModUtil.getBlockIdFromBlock(ModBlocks.MIKU_PLUSH_LUCARIO_Z))||
             variant.equals(ModUtil.getBlockIdFromBlock(ModBlocks.MIKU_PLUSH_PPPP))
         ) {
-            return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "geo/entity/" + entity + "_3" + ".geo.json");
+            return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "entity/" + entity + "_3");
         }
-        return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "geo/entity/" + entity + ".geo.json");
+        return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "entity/" + entity);
     }
 
     @Override
-    public Identifier getTextureResource(AbstractPlushEntity animatable) {
-        return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, variantToBlockTextureName(animatable));
+    public Identifier getTextureResource(GeoRenderState renderState) {
+        return Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID,
+            "textures/block/" + renderState.getGeckolibData(VARIANT).replace('_', '-') + ".png");
     }
 
     @Override
@@ -65,20 +83,5 @@ public class AbstractPlushModel extends GeoModel<AbstractPlushEntity> {
         return animations;
     }
 
-    @Override
-    public void setCustomAnimations(AbstractPlushEntity animatable, long instanceId, AnimationState<AbstractPlushEntity> animationState) {
-        super.setCustomAnimations(animatable, instanceId, animationState);
-        if (
-            animatable.getPlushName().contains("miku") ||
-            animatable.getPlushName().contains("teto") ||
-            animatable.getPlushName().contains("neru")
-        ) {
-            PlushAnimations.hairMovement(this, animatable, animationState);
-        }
-        PlushAnimations.limbAnimations(this, animatable, animationState);
-    }
 
-    private String variantToBlockTextureName (AbstractPlushEntity animatable) {
-        return "textures/block/" + animatable.getVariant().replace('_', '-') + ".png";
-    }
 }
