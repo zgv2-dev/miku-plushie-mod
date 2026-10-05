@@ -30,10 +30,10 @@
 		"miku-plushie.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.19.5",
+		"fabricloader": ">=${loader}",
 		"minecraft": "~${minecraft}",
 		"geckolib": ">=${geckolib}",
 		"java": ">=25",
-		"fabric-api": "*"
+		"fabric-api": ">=${fabric}"
 	}
 }

@@ -49,7 +49,8 @@ dependencies {
 }
 
 processResources {
-	def props = [version: project.version, minecraft: project.minecraft_version, geckolib: project.geckolib_min]
+	def props = [version: project.version, minecraft: project.minecraft_version, geckolib: project.geckolib_min,
+	             loader: project.loader_min, fabric: project.fabric_min]
 	inputs.properties props
 
 	filesMatching("fabric.mod.json") {
