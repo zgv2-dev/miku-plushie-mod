@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:gray_wool",
+    "minecraft:red_wool",
+    "minecraft:moss_block"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_br_rs"
+  }
+}

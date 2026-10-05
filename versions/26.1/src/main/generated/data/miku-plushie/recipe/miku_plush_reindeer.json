@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:brown_wool",
+    "minecraft:redstone_torch"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_reindeer"
+  }
+}

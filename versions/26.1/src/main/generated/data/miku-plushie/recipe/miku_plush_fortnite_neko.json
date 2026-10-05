@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:pink_wool",
+    "minecraft:light_blue_wool"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_fortnite_neko"
+  }
+}

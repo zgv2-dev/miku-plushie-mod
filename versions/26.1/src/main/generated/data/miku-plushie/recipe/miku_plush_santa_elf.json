@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:lime_wool",
+    "minecraft:red_wool"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_santa_elf"
+  }
+}

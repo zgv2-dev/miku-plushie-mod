@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:yellow_wool",
+    "minecraft:light_blue_wool",
+    "minecraft:white_wool"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_patati"
+  }
+}

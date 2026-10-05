@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:teto_plush",
+    "minecraft:black_stained_glass",
+    "minecraft:black_stained_glass",
+    "minecraft:white_wool"
+  ],
+  "result": {
+    "id": "miku-plushie:teto_plush_liar_dancer"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": { "Name": "miku-plushie:wild_leek_crop" }
+    }
+  }
+}

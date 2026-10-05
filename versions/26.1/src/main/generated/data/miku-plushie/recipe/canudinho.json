@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "p": "minecraft:paper"
+  },
+  "pattern": [
+    "p",
+    "p"
+  ],
+  "result": {
+    "id": "miku-plushie:canudinho"
+  }
+}

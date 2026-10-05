@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:ender_eye"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_infinity"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:yellow_wool",
+    "minecraft:green_wool",
+    "minecraft:glowstone"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_br_braid"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "w": "minecraft:wheat"
+  },
+  "pattern": [
+    "www",
+    "www"
+  ],
+  "result": {
+    "id": "miku-plushie:baguette"
+  }
+}

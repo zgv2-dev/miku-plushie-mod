@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": "minecraft:cyan_wool",
+    "2": "minecraft:white_wool",
+    "3": "minecraft:gray_wool"
+  },
+  "pattern": [
+    "121",
+    "131"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush"
+  }
+}

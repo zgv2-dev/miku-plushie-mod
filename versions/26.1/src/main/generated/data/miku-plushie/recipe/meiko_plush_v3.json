@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:meiko_plush",
+    "minecraft:iron_ingot"
+  ],
+  "result": {
+    "id": "miku-plushie:meiko_plush_v3"
+  }
+}

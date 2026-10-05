@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:note_block",
+    "minecraft:gold_nugget",
+    "minecraft:gold_nugget",
+    "minecraft:gold_nugget",
+    "minecraft:gold_nugget"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_digital_stars_2025"
+  }
+}

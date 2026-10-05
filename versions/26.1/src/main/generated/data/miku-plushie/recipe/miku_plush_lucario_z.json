@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:iron_bars",
+    "minecraft:white_wool",
+    "minecraft:redstone"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_lucario_z"
+  }
+}

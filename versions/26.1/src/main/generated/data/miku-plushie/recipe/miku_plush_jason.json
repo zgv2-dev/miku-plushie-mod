@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:birch_planks",
+    "minecraft:brown_wool",
+    "minecraft:iron_sword"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_jason"
+  }
+}

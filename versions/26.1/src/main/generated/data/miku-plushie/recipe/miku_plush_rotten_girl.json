@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:rotten_flesh"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_rotten_girl"
+  }
+}

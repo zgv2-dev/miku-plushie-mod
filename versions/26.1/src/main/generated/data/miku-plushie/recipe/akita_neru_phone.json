@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:gold_ingot",
+    "minecraft:redstone",
+    "minecraft:black_stained_glass"
+  ],
+  "result": {
+    "id": "miku-plushie:akita_neru_phone"
+  }
+}

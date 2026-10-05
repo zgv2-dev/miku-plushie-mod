@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:green_wool",
+    "minecraft:emerald"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_link"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:brown_wool",
+    "minecraft:black_wool",
+    "minecraft:iron_nugget"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_br_brown_bro"
+  }
+}

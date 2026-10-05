@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:bone",
+    "minecraft:mutton"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_werewoman"
+  }
+}

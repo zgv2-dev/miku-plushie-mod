@@ -3,3 +3,20 @@ plugins {
 }
 
 stonecutter.active '26.3'
+
+// 26.2 grouped dye-colored items (Items.WOOL.lightGray()) and moved a few classes.
+// Source uses the 26.2+ names; these rewrite them to the 26.1 names when building 26.1.
+def colors = ['white', 'orange', 'magenta', 'lightBlue', 'yellow', 'lime', 'pink', 'gray',
+              'lightGray', 'cyan', 'purple', 'blue', 'brown', 'green', 'red', 'black']
+stonecutter.parameters {
+	replacements.string(current.parsed.matches('>=26.2')) {
+		for (family in ['WOOL', 'STAINED_GLASS', 'DYE', 'CONCRETE']) {
+			for (c in colors) {
+				def upper = c.replaceAll(/([A-Z])/, '_$1').toUpperCase()
+				replace "Items.${upper}_${family}", "Items.${family}.${c}()"
+			}
+		}
+		replace 'Items.LIGHTNING_ROD', 'Items.LIGHTNING_ROD.weathering().unaffected()'
+		replace 'net.minecraft.advancements.criterion.StatePropertiesPredicate', 'net.minecraft.advancements.predicates.StatePropertiesPredicate'
+	}
+}
