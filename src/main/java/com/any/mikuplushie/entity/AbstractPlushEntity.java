@@ -117,7 +117,7 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
 
     //ATTRIBUTES
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
+        return net.minecraft.world.entity.animal.Animal.createAnimalAttributes()
             .add(Attributes.MAX_HEALTH, 20.0F)
             .add(Attributes.MOVEMENT_SPEED, 0.3F)
             .add(Attributes.ATTACK_DAMAGE, 2.0F);
