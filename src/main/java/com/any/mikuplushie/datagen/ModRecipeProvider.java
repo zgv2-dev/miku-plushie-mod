@@ -4,9 +4,11 @@ import com.any.mikuplushie.registry.ModBlocks;
 import com.any.mikuplushie.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+//? if >=26.3 {
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.advancements.Advancement;
+//?}
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -24,9 +26,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
+    //? if >=26.3 {
     protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
         return new Recipes(recipes, advancements);
     }
+    //?} else {
+    /*protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        return new Recipes(registries, output);
+    }
+    *///?}
 
     @Override
     public String getName() {
@@ -34,9 +42,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     private static class Recipes extends RecipeProvider {
+    //? if >=26.3 {
     Recipes(BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
         super(recipes, advancements);
     }
+    //?} else {
+    /*Recipes(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
+    }
+    *///?}
 
     @Override
     public void buildRecipes() {

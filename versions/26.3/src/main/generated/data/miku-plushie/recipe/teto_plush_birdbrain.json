@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:teto_plush",
+    "minecraft:wheat_seeds",
+    "minecraft:egg"
+  ],
+  "result": {
+    "id": "miku-plushie:teto_plush_birdbrain"
+  }
+}

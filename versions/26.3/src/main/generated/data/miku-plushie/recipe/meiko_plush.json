@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "1": "minecraft:brown_wool",
+    "2": "minecraft:white_wool",
+    "3": "minecraft:red_wool"
+  },
+  "pattern": [
+    "121",
+    " 3 "
+  ],
+  "result": {
+    "id": "miku-plushie:meiko_plush"
+  }
+}

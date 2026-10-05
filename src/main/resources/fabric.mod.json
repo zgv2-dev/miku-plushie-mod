@@ -25,13 +25,14 @@
 			"com.any.mikuplushie.MikuPlushieClient"
 		]
 	},
+	"accessWidener": "miku-plushie.classtweaker",
 	"mixins": [
 		"miku-plushie.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.19.5",
-		"minecraft": "~26.3",
-		"geckolib": ">=5.5.7",
+		"minecraft": "~${minecraft}",
+		"geckolib": ">=${geckolib}",
 		"java": ">=25",
 		"fabric-api": "*"
 	},

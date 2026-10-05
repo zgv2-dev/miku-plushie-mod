@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:lily_of_the_valley"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_hachune"
+  }
+}

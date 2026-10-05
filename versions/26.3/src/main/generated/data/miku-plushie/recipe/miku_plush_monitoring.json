@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:brown_wool",
+    "minecraft:spyglass"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_monitoring"
+  }
+}

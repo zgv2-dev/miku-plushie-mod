@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:teto_plush",
+    "minecraft:pink_dye",
+    "minecraft:glowstone_dust"
+  ],
+  "result": {
+    "id": "miku-plushie:teto_plush_spoken_for"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:green_wool",
+    "minecraft:yellow_wool",
+    "minecraft:blue_wool",
+    "minecraft:jungle_sapling"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_br_am"
+  }
+}

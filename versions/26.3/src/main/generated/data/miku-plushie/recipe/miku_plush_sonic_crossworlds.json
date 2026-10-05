@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:magenta_wool",
+    "minecraft:black_wool"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_sonic_crossworlds"
+  }
+}

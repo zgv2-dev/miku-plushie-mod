@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:tube_coral",
+    "minecraft:bubble_coral"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_deep_sea_girl"
+  }
+}

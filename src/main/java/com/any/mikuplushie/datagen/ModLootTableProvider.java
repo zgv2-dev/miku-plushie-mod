@@ -9,7 +9,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+//? if >=26.3 {
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
+//?} else
+/*import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;*/
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -29,10 +32,18 @@ public class ModLootTableProvider extends FabricBlockLootSubProvider {
             dropOther(plushBlocks.get(block), plushItems.get(block));
         }
 
+        //? if >=26.3 {
         LootItemCondition.Builder leekLootCondition = MatchBlock.blockMatches(blocks, ModBlocks.LEEK_CROP,
             StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, 7));
+        //?} else {
+        /*LootItemCondition.Builder leekLootCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LEEK_CROP)
+            .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, 7));
+        *///?}
         add(ModBlocks.LEEK_CROP, createCropDrops(ModBlocks.LEEK_CROP, ModItems.LEEK, ModItems.LEEK_SEEDS, leekLootCondition));
+        //? if >=26.3 {
         LootItemCondition.Builder wildLeekLootCondition = MatchBlock.blockMatches(blocks, ModBlocks.WILD_LEEK_CROP);
+        //?} else
+        /*LootItemCondition.Builder wildLeekLootCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.WILD_LEEK_CROP);*/
         add(ModBlocks.WILD_LEEK_CROP, createCropDrops(ModBlocks.WILD_LEEK_CROP, ModItems.LEEK, ModItems.LEEK_SEEDS, wildLeekLootCondition));
 	}
 }

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:yellow_dye",
+    "minecraft:magenta_dye",
+    "minecraft:cyan_dye",
+    "minecraft:blue_wool"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_static"
+  }
+}

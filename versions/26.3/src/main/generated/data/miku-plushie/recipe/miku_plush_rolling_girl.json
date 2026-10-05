@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:white_wool",
+    "minecraft:brown_wool"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_rolling_girl"
+  }
+}

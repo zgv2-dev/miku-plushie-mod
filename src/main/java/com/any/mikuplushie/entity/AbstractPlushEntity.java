@@ -252,6 +252,18 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
         return this.cache;
     }
 
+    //? if <26.3 {
+    /*//26.2 HAS NO isSwinging(); SWING LENGTH IS SET HERE (made overridable by miku-plushie.classtweaker)
+    public boolean isSwinging() {
+        return this.swinging;
+    }
+
+    @Override
+    public final int getCurrentSwingDuration() {
+        return 10;
+    }
+    *///?}
+
     //STATIC SOUND PITCH
     @Override
     public float getVoicePitch() {

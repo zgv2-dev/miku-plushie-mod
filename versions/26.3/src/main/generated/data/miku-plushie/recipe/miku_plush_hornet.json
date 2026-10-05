@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:red_wool",
+    "minecraft:iron_sword",
+    "minecraft:bone_block"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_hornet"
+  }
+}

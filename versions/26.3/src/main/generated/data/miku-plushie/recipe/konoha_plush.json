@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "1": "minecraft:white_wool",
+    "2": "minecraft:light_gray_wool",
+    "3": "minecraft:lime_wool"
+  },
+  "pattern": [
+    "121",
+    "323"
+  ],
+  "result": {
+    "id": "miku-plushie:konoha_plush"
+  }
+}

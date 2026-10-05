@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "1": "minecraft:yellow_wool",
+    "2": "minecraft:white_wool",
+    "3": "minecraft:brown_wool"
+  },
+  "pattern": [
+    "121",
+    "131"
+  ],
+  "result": {
+    "id": "miku-plushie:akita_neru_plush"
+  }
+}

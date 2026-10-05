@@ -1,0 +1,5 @@
+classTweaker v2 official
+
+# 26.2: let plushes set their own swing length (26.3 passes it in the swing call)
+#? if <26.3
+#extendable	method	net/minecraft/world/entity/LivingEntity	getCurrentSwingDuration	()I

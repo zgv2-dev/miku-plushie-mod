@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:teto_plush",
+    "minecraft:kelp",
+    "minecraft:kelp"
+  ],
+  "result": {
+    "id": "miku-plushie:teto_plush_shrimp"
+  }
+}

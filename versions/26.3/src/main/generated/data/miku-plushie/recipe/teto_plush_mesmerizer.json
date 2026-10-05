@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:teto_plush",
+    "minecraft:red_wool",
+    "minecraft:red_wool"
+  ],
+  "result": {
+    "id": "miku-plushie:teto_plush_mesmerizer"
+  }
+}

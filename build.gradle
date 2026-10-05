@@ -3,7 +3,8 @@ plugins {
 	id 'maven-publish'
 }
 
-version = project.mod_version
+// jar is miku-plushie-<mod_version>+<mc>.jar; per-MC deps come from versions/<mc>/gradle.properties
+version = "${project.mod_version}+${sc.current.version}"
 group = project.maven_group
 
 base {
@@ -25,9 +26,18 @@ repositories {
     }
 }
 
+// datagen output is per MC version: versions/<mc>/src/main/generated
 fabricApi {
 	configureDataGeneration {
 		client = true
+	}
+}
+
+loom {
+	// class tweaker uses #? stonecutter conditions, processed per version
+	accessWidenerPath = sc.process(rootProject.file("src/main/resources/miku-plushie.classtweaker"), "build/processed.ct")
+	runConfigs.all {
+		runDir = "../../run" // one run/ dir shared by all versions
 	}
 }
 
@@ -45,10 +55,11 @@ dependencies {
 }
 
 processResources {
-	inputs.property "version", project.version
+	def props = [version: project.version, minecraft: project.minecraft_version, geckolib: project.geckolib_min]
+	inputs.properties props
 
 	filesMatching("fabric.mod.json") {
-		expand "version": inputs.properties.version
+		expand props
 	}
 }
 
@@ -69,7 +80,7 @@ java {
 jar {
 	inputs.property "archivesName", project.base.archivesName
 
-	from("LICENSE") {
+	from(rootProject.file("LICENSE")) {
 		rename { "${it}_${inputs.properties.archivesName}"}
 	}
 }

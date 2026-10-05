@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:blue_wool",
+    "minecraft:redstone"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_sonic"
+  }
+}

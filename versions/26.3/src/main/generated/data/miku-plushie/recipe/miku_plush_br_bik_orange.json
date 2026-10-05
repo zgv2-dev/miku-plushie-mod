@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:orange_wool",
+    "minecraft:water_bucket"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_br_bik_orange"
+  }
+}

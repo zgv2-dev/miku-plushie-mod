@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:white_wool",
+    "minecraft:gold_ingot",
+    "minecraft:cake"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_world_is_mine"
+  }
+}

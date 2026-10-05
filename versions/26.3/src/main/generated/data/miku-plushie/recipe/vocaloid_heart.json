@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "miku-plushie:baguette",
+    "L": "miku-plushie:leek",
+    "N": "minecraft:note_block",
+    "P": "miku-plushie:akita_neru_phone"
+  },
+  "pattern": [
+    "LN",
+    "BP"
+  ],
+  "result": {
+    "id": "miku-plushie:vocaloid_heart"
+  }
+}

@@ -20,9 +20,12 @@ public class MikuDelayedAttackGoal extends MeleeAttackGoal {
     protected void checkAndPerformAttack(LivingEntity target) {
         if (this.canPerformAttack(target)) {
             this.resetAttackCooldown();
-            // plush swing lasts 10 ticks (was LivingEntity#getCurrentSwingDuration override pre-26.x)
+            //? if >=26.3 {
+            // plush swing lasts 10 ticks (26.2: AbstractPlushEntity#getCurrentSwingDuration)
             this.mob.swing(InteractionHand.MAIN_HAND, new net.minecraft.world.item.component.SwingAnimation(
                 this.mob.getMainHandItem().getAttackAnimation().type(), 10), false);
+            //?} else
+            /*this.mob.swing(InteractionHand.MAIN_HAND);*/
             this.target = target;
             this.mikuAttacking = true;
         }

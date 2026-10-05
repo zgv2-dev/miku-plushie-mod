@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "miku-plushie:miku_plush",
+    "minecraft:red_wool",
+    "minecraft:white_wool",
+    "minecraft:snow_block"
+  ],
+  "result": {
+    "id": "miku-plushie:miku_plush_santa"
+  }
+}
