@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_rolling_girl"
+        "recipes": "miku-plushie:miku_plush_rolling_girl"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:teto_plush_birdbrain"
+        "recipes": "miku-plushie:teto_plush_birdbrain"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

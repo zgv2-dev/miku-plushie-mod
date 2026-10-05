@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:teto_pickaxe"
+        "recipes": "miku-plushie:teto_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

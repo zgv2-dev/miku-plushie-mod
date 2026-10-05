@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_digital_stars_2025"
+        "recipes": "miku-plushie:miku_plush_digital_stars_2025"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

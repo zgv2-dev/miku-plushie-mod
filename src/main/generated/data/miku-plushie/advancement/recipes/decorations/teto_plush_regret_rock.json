@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:teto_plush_regret_rock"
+        "recipes": "miku-plushie:teto_plush_regret_rock"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

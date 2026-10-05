@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:akita_neru_plush_tails"
+        "recipes": "miku-plushie:akita_neru_plush_tails"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

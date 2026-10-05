@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:teto_plush_liar_dancer"
+        "recipes": "miku-plushie:teto_plush_liar_dancer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

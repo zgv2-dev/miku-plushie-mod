@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:kaito_plush_v4"
+        "recipes": "miku-plushie:kaito_plush_v4"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

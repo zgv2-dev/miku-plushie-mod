@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_dont_believe_in_t"
+        "recipes": "miku-plushie:miku_plush_dont_believe_in_t"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

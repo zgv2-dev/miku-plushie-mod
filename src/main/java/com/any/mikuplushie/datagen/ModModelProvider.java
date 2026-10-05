@@ -10,6 +10,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import java.util.List;
+import net.minecraft.world.item.Item;
 
 public class ModModelProvider extends FabricModelProvider {
 
@@ -35,5 +36,15 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.LEEK_SEEDS, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.VOCALOID_HEART, ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.LEEK, ModelTemplates.FLAT_HANDHELD_ITEM);
+
+        // items with hand-made models in resources/assets/miku-plushie/models/item: just point the item definition at them
+        List<Item> handMade = new java.util.ArrayList<>(ModItems.PICKAXE_ITEMS);
+        handMade.add(ModItems.BAGUETTE);
+        handMade.add(ModItems.AKITA_NERU_PHONE);
+        for (Item item : handMade) {
+            itemModelGenerator.itemModelOutput.accept(item,
+                net.minecraft.client.data.models.model.ItemModelUtils.plainModel(
+                    net.minecraft.client.data.models.model.ModelLocationUtils.getModelLocation(item)));
+        }
 	}
 }

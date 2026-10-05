@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:akita_neru_phone"
+        "recipes": "miku-plushie:akita_neru_phone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

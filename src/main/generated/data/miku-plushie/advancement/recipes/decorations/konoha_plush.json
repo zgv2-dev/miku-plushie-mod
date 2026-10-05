@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:konoha_plush"
+        "recipes": "miku-plushie:konoha_plush"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

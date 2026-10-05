@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_br_brown_bro"
+        "recipes": "miku-plushie:miku_plush_br_brown_bro"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

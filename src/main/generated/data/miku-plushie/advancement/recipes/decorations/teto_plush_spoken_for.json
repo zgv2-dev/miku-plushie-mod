@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:teto_plush_spoken_for"
+        "recipes": "miku-plushie:teto_plush_spoken_for"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

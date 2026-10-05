@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_hornet"
+        "recipes": "miku-plushie:miku_plush_hornet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:teto_plush_lobster"
+        "recipes": "miku-plushie:teto_plush_lobster"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

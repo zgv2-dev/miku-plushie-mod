@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:luka_plush"
+        "recipes": "miku-plushie:luka_plush"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_hollow_knight"
+        "recipes": "miku-plushie:miku_plush_hollow_knight"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

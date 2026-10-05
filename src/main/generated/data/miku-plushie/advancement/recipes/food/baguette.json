@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:baguette"
+        "recipes": "miku-plushie:baguette"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

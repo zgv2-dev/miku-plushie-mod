@@ -1,16 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
-    {
-      "item": "miku-plushie:teto_plush"
-    },
-    {
-      "item": "minecraft:iron_ingot"
-    }
+    "miku-plushie:teto_plush",
+    "minecraft:iron_ingot"
   ],
   "result": {
-    "count": 1,
     "id": "miku-plushie:teto_plush_synthv"
   }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:aiko_plush"
+        "recipes": "miku-plushie:aiko_plush"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

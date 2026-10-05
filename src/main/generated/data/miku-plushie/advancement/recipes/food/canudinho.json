@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:canudinho"
+        "recipes": "miku-plushie:canudinho"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

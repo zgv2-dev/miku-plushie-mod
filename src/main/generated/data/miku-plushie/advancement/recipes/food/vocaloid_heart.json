@@ -43,7 +43,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:vocaloid_heart"
+        "recipes": "miku-plushie:vocaloid_heart"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

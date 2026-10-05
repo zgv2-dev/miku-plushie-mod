@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_fortnite_neko"
+        "recipes": "miku-plushie:miku_plush_fortnite_neko"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

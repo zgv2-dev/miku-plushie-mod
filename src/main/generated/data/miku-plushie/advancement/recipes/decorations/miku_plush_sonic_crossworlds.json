@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_sonic_crossworlds"
+        "recipes": "miku-plushie:miku_plush_sonic_crossworlds"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

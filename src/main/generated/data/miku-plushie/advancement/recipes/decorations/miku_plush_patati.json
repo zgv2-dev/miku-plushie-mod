@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "miku-plushie:miku_plush_patati"
+        "recipes": "miku-plushie:miku_plush_patati"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
