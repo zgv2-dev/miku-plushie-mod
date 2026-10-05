@@ -5,8 +5,8 @@ import com.any.mikuplushie.entity.AbstractPlushEntity;
 import com.any.mikuplushie.registry.ModEntities;
 import com.any.mikuplushie.registry.ModItems;
 import com.any.mikuplushie.util.ModUtil;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
+public class ModItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
 
-    public ModItemTagProvider(FabricDataOutput output,
+    public ModItemTagProvider(FabricPackOutput output,
                               CompletableFuture<HolderLookup.Provider> completableFuture) {
         super(output, completableFuture);
     }
@@ -49,20 +49,20 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
             for (TagKey<Item> tag : PLUSH_TAGS) {
                 plushTagName = tag.location().toString().split(":")[1];
                 if (plushName.contains(plushTagName)){
-                    getOrCreateTagBuilder(tag).add(ModItems.PLUSH_ITEMS.get(plush));
+                    builder(tag).add(ModItems.PLUSH_ITEMS.get(plush).builtInRegistryHolder().key());
                 }
             }
         }
 
         //ADD PICKAXES TO THEIR OWN TAG
         for (Item pickaxe : ModItems.PICKAXE_ITEMS){
-            getOrCreateTagBuilder(TETO_PICKAXE).add(pickaxe);
-            getOrCreateTagBuilder(ItemTags.CLUSTER_MAX_HARVESTABLES).add(pickaxe);
-            getOrCreateTagBuilder(ItemTags.PICKAXES).add(pickaxe);
+            builder(TETO_PICKAXE).add(pickaxe.builtInRegistryHolder().key());
+            builder(ItemTags.CLUSTER_MAX_HARVESTABLES).add(pickaxe.builtInRegistryHolder().key());
+            builder(ItemTags.PICKAXES).add(pickaxe.builtInRegistryHolder().key());
         }
 
         for (TagKey<Item> tag : PLUSH_TAGS){
-            getOrCreateTagBuilder(PLUSHIES).addOptionalTag(tag);
+            builder(PLUSHIES).addOptionalTag(tag);
         }
 
     }
