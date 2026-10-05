@@ -190,6 +190,12 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
             //STANDING UP ANIMATIONS
             else {
 
+                //LET SPAWN/ATTACK FINISH (GeckoLib 5 plays the transition first, so the server timers end them early)
+                RawAnimation playing = state.controller().getCurrentRawAnimation();
+                if (playing != null && (SPAWN.equals(playing) || ATTACK_ANIMATIONS.contains(playing)) && !state.controller().hasAnimationFinished()) {
+                    return state.setAndContinue(playing);
+                }
+
                 //SPAWN ANIMATION
                 if (this.entityData.get(SPAWN_AGE) < 10){
                     return state.setAndContinue(SPAWN);
@@ -211,8 +217,7 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
                     }
                     //RANDOMLY SELECT DANCE ANIMATION FROM LIST
                     else {
-                        return state.setAndContinue(DANCES.get(this.random.nextInt(
-                            0, DANCES.size()-1)
+                        return state.setAndContinue(DANCES.get(this.random.nextInt(DANCES.size())
                         ));
                     }
 
@@ -229,8 +234,7 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
                         }
                     }
                     //RANDOMLY SELECT ATTACK ANIMATION FROM LIST
-                    return state.setAndContinue(ATTACK_ANIMATIONS.get(this.random.nextInt(
-                        0, ATTACK_ANIMATIONS.size()-1)
+                    return state.setAndContinue(ATTACK_ANIMATIONS.get(this.random.nextInt(ATTACK_ANIMATIONS.size())
                     ));
                 }
 
