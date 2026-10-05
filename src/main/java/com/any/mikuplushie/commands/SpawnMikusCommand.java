@@ -115,7 +115,7 @@ public class SpawnMikusCommand {
                             //GET FIRST TWO WORDS
                             String entityName = ModUtil.getEntityNameFromBlockId(blockName);
                             //ENTITY TYPE REGISTRY
-                            Registry<EntityType<?>> entityTypeRegistry = world.registryAccess().registryOrThrow(Registries.ENTITY_TYPE);
+                            Registry<EntityType<?>> entityTypeRegistry = world.registryAccess().lookupOrThrow(Registries.ENTITY_TYPE);
 
                             //ITERATE THROUGH ALL REGISTERED ENTITIES AND FILTER BY NAME
                             for (int entity = 0; entity < entityTypeRegistry.size(); entity++) {

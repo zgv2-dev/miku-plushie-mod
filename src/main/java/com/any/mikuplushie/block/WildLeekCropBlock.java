@@ -29,7 +29,7 @@ public class WildLeekCropBlock extends Block {
     }
 
     @Override
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+    protected ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
         return new ItemStack(this.getSeedsItem());
     }
 
@@ -39,12 +39,13 @@ public class WildLeekCropBlock extends Block {
     }
 
     @Override
-    public BlockState updateShape(
-        BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos
+    protected BlockState updateShape(
+        BlockState state, LevelReader world, net.minecraft.world.level.ScheduledTickAccess ticks, BlockPos pos,
+        Direction direction, BlockPos neighborPos, BlockState neighborState, net.minecraft.util.RandomSource random
     ) {
         return !state.canSurvive(world, pos)
             ? Blocks.AIR.defaultBlockState()
-            : super.updateShape(state, direction, neighborState, world, pos, neighborPos);
+            : super.updateShape(state, world, ticks, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class WildLeekCropBlock extends Block {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter world, BlockPos pos) {
+    protected boolean propagatesSkylightDown(BlockState state) {
         return state.getFluidState().isEmpty();
     }
 

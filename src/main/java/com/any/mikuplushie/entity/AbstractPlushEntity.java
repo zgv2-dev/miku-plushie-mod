@@ -278,7 +278,7 @@ public class AbstractPlushEntity extends TamableAnimal implements GeoEntity {
         //TAMED INTERACTION
         if (this.onGround() && this.isTame() && this.isOwnedBy(player)) {
             //DO STUFF ON SERVER
-            if (!this.level().isClientSide) {
+            if (!this.level().isClientSide()) {
                 //DROP HELD ITEM
                 if (player.isShiftKeyDown() && playerItemStack.isEmpty()) {
                     this.spawnAtLocation(entityHandStack);

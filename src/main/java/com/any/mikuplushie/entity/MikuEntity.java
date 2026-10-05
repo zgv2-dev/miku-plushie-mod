@@ -73,7 +73,7 @@ public class MikuEntity extends AbstractPlushEntity {
         super.aiStep();
 
         //CLIENT LEEK EATING TIMER
-        if (this.level().isClientSide){
+        if (this.level().isClientSide()){
             //DECREASE LEEK TIMER UNTIL 0
             this.eatLeekTimer = Math.max(0, this.eatLeekTimer -1);
             //SET EATING LEEK TRUE IF THE COUNTER IS RUNNING

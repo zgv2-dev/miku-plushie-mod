@@ -124,14 +124,14 @@ public class ModBlocks {
 
     //NON PLUSH STUFF
     public static final LeekCropBlock LEEK_CROP = (LeekCropBlock) register(
-        new LeekCropBlock(BlockBehaviour.Properties.of()
-            .noOcclusion().noCollission().randomTicks().instabreak().sound(SoundType.CROP)),
+        LeekCropBlock::new, BlockBehaviour.Properties.of()
+            .noOcclusion().noCollision().randomTicks().instabreak().sound(SoundType.CROP),
         "leek_crop",
         false
     );
     public static final WildLeekCropBlock WILD_LEEK_CROP = (WildLeekCropBlock) register(
-        new WildLeekCropBlock(BlockBehaviour.Properties.of()
-            .noOcclusion().noCollission().randomTicks().instabreak().sound(SoundType.CROP)),
+        WildLeekCropBlock::new, BlockBehaviour.Properties.of()
+            .noOcclusion().noCollision().randomTicks().instabreak().sound(SoundType.CROP),
         "wild_leek_crop",
         false
     );
@@ -143,18 +143,19 @@ public class ModBlocks {
         blockSoundGroup = Objects.requireNonNullElse(blockSound, SoundType.WOOL);
         //REGISTER BLOCK NORMALLY
         return register(
-            new MikuPlushieBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT)
-                .sound(blockSoundGroup).noOcclusion()), name, false);
+            MikuPlushieBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT)
+                .sound(blockSoundGroup).noOcclusion(), name, false);
     }
 
     //REGISTER REGULAR BLOCKS
-	public static Block register(Block block, String name, boolean shouldRegisterItem) {
+	public static Block register(java.util.function.Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties, String name, boolean shouldRegisterItem) {
         //CREATE IDENTIFIER
         Identifier id = Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, name);
+        Block block = factory.apply(properties.setId(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BLOCK, id)));
 
         //REGISTER ITEM IF REQUESTED
         if (shouldRegisterItem) {
-            BlockItem blockItem = new BlockItem(block, new Item.Properties());
+            BlockItem blockItem = new BlockItem(block, new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ITEM, id)).useBlockDescriptionPrefix());
             Registry.register(BuiltInRegistries.ITEM, id, blockItem);
         }
 
