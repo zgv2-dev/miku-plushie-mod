@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -25,8 +25,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         super(output, completableFuture);
     }
 
-    public static final TagKey<Item> PLUSHIES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MikuPlushie.MOD_ID, "plushies"));
-    public static final TagKey<Item> TETO_PICKAXE = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MikuPlushie.MOD_ID, "teto_pickaxe"));
+    public static final TagKey<Item> PLUSHIES = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "plushies"));
+    public static final TagKey<Item> TETO_PICKAXE = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "teto_pickaxe"));
 
     public static List<TagKey<Item>> PLUSH_TAGS = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         for (EntityType<?> plushEntity : plushEntities){
             String plushName = plushEntity.toShortString();
             PLUSH_TAGS.add(
-                TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MikuPlushie.MOD_ID, plushName))
+                TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, plushName))
             );
         }
 

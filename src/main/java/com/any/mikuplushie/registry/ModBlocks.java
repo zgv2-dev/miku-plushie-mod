@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -150,7 +150,7 @@ public class ModBlocks {
     //REGISTER REGULAR BLOCKS
 	public static Block register(Block block, String name, boolean shouldRegisterItem) {
         //CREATE IDENTIFIER
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(MikuPlushie.MOD_ID, name);
+        Identifier id = Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, name);
 
         //REGISTER ITEM IF REQUESTED
         if (shouldRegisterItem) {

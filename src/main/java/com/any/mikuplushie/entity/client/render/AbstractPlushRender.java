@@ -11,7 +11,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
@@ -78,7 +78,7 @@ public class AbstractPlushRender extends GeoEntityRenderer<AbstractPlushEntity> 
     }
 
     @Override
-    public RenderType getRenderType(AbstractPlushEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
+    public RenderType getRenderType(AbstractPlushEntity animatable, Identifier texture, MultiBufferSource bufferSource, float partialTick) {
         //USE TRANSLUCENT RENDER ON SPECIFIC VARIATION
         if (
             animatable.getVariant().equals(ModUtil.getBlockIdFromBlock(ModBlocks.MIKU_PLUSH_GHOST)) ||

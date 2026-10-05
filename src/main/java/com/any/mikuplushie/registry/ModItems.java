@@ -11,7 +11,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -30,7 +30,7 @@ public class ModItems {
 
     //CREATE ITEM GROUP
 	public static final ResourceKey<CreativeModeTab> MIKU_GROUP_KEY =
-        ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),ResourceLocation.fromNamespaceAndPath(MikuPlushie.MOD_ID, "item_group")
+        ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(),Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, "item_group")
 	);
 	public static final CreativeModeTab MIKU_GROUP = FabricItemGroup.builder()
 		.icon(() -> new ItemStack(ModBlocks.MIKU_PLUSH))
@@ -90,7 +90,7 @@ public class ModItems {
 
     //REGISTER NORMAL ITEM
 	public static Item register(Item item, String id) {
-		ResourceLocation itemID = ResourceLocation.fromNamespaceAndPath(MikuPlushie.MOD_ID, id);
+		Identifier itemID = Identifier.fromNamespaceAndPath(MikuPlushie.MOD_ID, id);
         Item register = Registry.register(BuiltInRegistries.ITEM, itemID, item);
         String itemName = ModUtil.getBlockIdFromItem(item);
 
